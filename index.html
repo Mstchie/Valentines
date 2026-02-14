@@ -850,16 +850,16 @@
             <div class="heart"></div>
         </div>
 
-        <h1 id="main-title">Happy Valentine’s Luuuuv!!! ❤️</h1>
+        <h2 id="main-title">Happy Valentine’s Luuuuv!!! ❤️</h2>
         <p class="subtitle" id="sub-title">ILoveYou so Much</p>
 
-        <button class="btn" id="revealAction">Pa Click Luv!</button>
+        <button class="btn" id="revealAction">Click here!</button>
 
         <div id="message-area">
             <span id="typewriter-text"></span><span class="cursor" id="cursor"></span>
         </div>
 
-        <button id="gift-btn">Click Me to get your kiss and flower</button>
+        <button id="gift-btn">Claim gifts here</button>
     </div>
 
     <script>
@@ -1219,7 +1219,7 @@
         const h1 = document.getElementById('main-title');
 
         // The romantic letter content
-        const loveLetter = "Hey luuuuvv!!,\n This Valentine’s Day, I just want you to know that you are my favorite person, my peace, and my choice—today and always.";
+        const loveLetter = "Enjoy this small surprise for you!";
 
         revealBtn.addEventListener('click', () => {
             revealBtn.style.display = 'none';
@@ -1362,7 +1362,7 @@
             gParticles = [];
             kissCont.classList.add('visible', 'bounce');
             gMainMsg.innerText = "MUAAAAH! 💕";
-            gSubMsg.innerText = "A kiss for my luuuuv!";
+            gSubMsg.innerText = "A kiss for you";
             gTextGroup.classList.add('visible');
 
             await new Promise(r => setTimeout(r, 2500));
@@ -1390,8 +1390,8 @@
             // Phase 4: Rose Reveal
             gParticles = [];
             roseCont.classList.add('visible', 'bounce');
-            gMainMsg.innerText = "Rose for You Luvyy! 🌹";
-            gSubMsg.innerText = "You deserve all the beauty in the world.";
+            gMainMsg.innerText = "Rose for You🌹";
+            gSubMsg.innerText = "You deserve all the beauty in this world.";
             gTextGroup.classList.add('visible');
 
             gCloseBtn.style.opacity = '1';
@@ -1467,3 +1467,4 @@
 </body>
 
 </html>
+
