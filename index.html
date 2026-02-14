@@ -527,7 +527,7 @@
 
         #gift-text-group {
             position: absolute;
-            bottom: 12%;
+            bottom: 15%;
             left: 0;
             right: 0;
             text-align: center;
@@ -559,7 +559,7 @@
 
         #close-gift-btn {
             position: absolute;
-            bottom: 40px;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 110;
@@ -574,6 +574,24 @@
             font-family: inherit;
             opacity: 0;
             pointer-events: none;
+        }
+
+        @media (max-width: 480px) {
+            #gift-text-group {
+                bottom: 22%;
+            }
+
+            #close-gift-btn {
+                bottom: 20px;
+            }
+
+            .gift-message {
+                font-size: 1.4rem;
+            }
+
+            .gift-submessage {
+                font-size: 0.95rem;
+            }
         }
 
         #close-gift-btn:hover {
