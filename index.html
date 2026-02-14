@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's!</title>
+    <style>
+        :root {
+            --neon-red: #ff0033;
+            --neon-pink: #ff3366;
+            --glow-color: rgba(255, 0, 51, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #000;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: relative;
+            padding: 20px;
+            padding-bottom: 100px;
+            /* Space for the button */
+        }
+
+        /* Twinkling Stars Background */
+        .star {
+            position: fixed;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: twinkle var(--duration) ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+                box-shadow: 0 0 4px #fff;
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+        }
+
+        /* Main Container */
+        .container {
+            z-index: 10;
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+            padding: 20px;
+        }
+
+        /* Flickering Heart */
+        .heart-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 30px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .heart {
+            background-color: var(--neon-red);
+            display: inline-block;
+            height: 60px;
+            position: relative;
+            transform: rotate(-45deg);
+            width: 60px;
+            box-shadow: 0 0 20px var(--glow-color);
+            animation: flicker 1.5s infinite alternate;
+        }
+
+        .heart:before,
+        .heart:after {
+            content: "";
+            background-color: var(--neon-red);
+            border-radius: 50%;
+            height: 60px;
+            position: absolute;
+            width: 60px;
+            box-shadow: 0 0 20px var(--glow-color);
+        }
+
+        .heart:before {
+            top: -30px;
+            left: 0;
+        }
+
+        .heart:after {
+            left: 30px;
+            top: 0;
+        }
+
+        @keyframes flicker {
+            0% {
+                opacity: 1;
+                box-shadow: 0 0 20px var(--glow-color);
+            }
+
+            10% {
+                opacity: 0.8;
+                box-shadow: 0 0 10px var(--glow-color);
+            }
+
+            20% {
+                opacity: 1;
+                box-shadow: 0 0 25px var(--glow-color);
+            }
+
+            30% {
+                opacity: 0.6;
+                box-shadow: 0 0 5px var(--glow-color);
+            }
+
+            40% {
+                opacity: 1;
+                box-shadow: 0 0 20px var(--glow-color);
+            }
+
+            50% {
+                opacity: 0.9;
+                box-shadow: 0 0 15px var(--glow-color);
+            }
+
+            100% {
+                opacity: 1;
+                box-shadow: 0 0 30px var(--neon-red);
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px var(--neon-pink);
+            letter-spacing: 2px;
+        }
+
+        p.subtitle {
+            font-size: 1rem;
+            color: #ccc;
+            margin-bottom: 40px;
+            text-shadow: 0 0 5px var(--neon-pink);
+        }
+
+        /* Button */
+        .btn {
+            background: var(--neon-pink);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px var(--neon-pink);
+            font-family: inherit;
+            font-weight: bold;
+            animation: pulse-btn 2s infinite;
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+            background: white;
+            color: var(--neon-pink);
+            box-shadow: 0 0 25px var(--neon-pink), 0 0 50px var(--neon-pink);
+        }
+
+        @keyframes pulse-btn {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 15px var(--neon-pink);
+            }
+
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 25px var(--neon-pink), 0 0 35px var(--neon-red);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 15px var(--neon-pink);
+            }
+        }
+
+        /* Message Area */
+        #message-area {
+            display: none;
+            margin-top: 30px;
+            text-align: left;
+            padding: 25px;
+            min-height: 100px;
+            position: relative;
+
+            /* Glassmorphism effect */
+            background: linear-gradient(135deg, rgba(255, 20, 147, 0.1), rgba(138, 43, 226, 0.1));
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+
+            /* Neon border */
+            border: 2px solid transparent;
+            border-radius: 15px;
+            background-clip: padding-box;
+
+            /* Animated glow */
+            box-shadow:
+                0 0 20px rgba(255, 20, 147, 0.4),
+                0 0 40px rgba(138, 43, 226, 0.3),
+                inset 0 0 30px rgba(255, 20, 147, 0.1);
+
+            animation: box-glow 3s ease-in-out infinite;
+        }
+
+        #message-area::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg,
+                    var(--neon-pink),
+                    var(--neon-red),
+                    #8a2be2,
+                    var(--neon-pink));
+            background-size: 300% 300%;
+            border-radius: 15px;
+            z-index: -1;
+            animation: gradient-shift 4s ease infinite;
+        }
+
+        @keyframes box-glow {
+
+            0%,
+            100% {
+                box-shadow:
+                    0 0 20px rgba(255, 20, 147, 0.4),
+                    0 0 40px rgba(138, 43, 226, 0.3),
+                    inset 0 0 30px rgba(255, 20, 147, 0.1);
+            }
+
+            50% {
+                box-shadow:
+                    0 0 30px rgba(255, 20, 147, 0.6),
+                    0 0 60px rgba(138, 43, 226, 0.5),
+                    inset 0 0 40px rgba(255, 20, 147, 0.2);
+            }
+        }
+
+        @keyframes gradient-shift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        #typewriter-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            text-shadow: 0 0 2px white;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 15px;
+            background-color: var(--neon-pink);
+            margin-left: 5px;
+            animation: blink 0.8s infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .final-signature {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+            color: var(--neon-red);
+            font-size: 1.5rem;
+            text-shadow: 0 0 10px var(--neon-red);
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Gift Button */
+        #gift-btn {
+            display: none;
+            margin-top: 20px;
+            background: var(--neon-red);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 15px var(--neon-red);
+            animation: pulse-btn 2s infinite;
+            font-weight: bold;
+            font-family: inherit;
+        }
+
+        #gift-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px var(--neon-red);
+        }
+
+        /* Overlay */
+        #gift-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(20, 0, 10, 0.98), rgba(40, 0, 20, 0.98));
+            z-index: 100;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.5s forwards;
+            overflow: hidden;
+        }
+
+        .gift-content {
+            text-align: center;
+            position: relative;
+            z-index: 101;
+        }
+
+        .flower-bouquet {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeInFlowers 1s ease-in forwards;
+            animation-delay: 1.5s;
+            /* Appear after kiss */
+        }
+
+        @keyframes fadeInFlowers {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .big-flower {
+            font-size: 6rem;
+            filter: drop-shadow(0 0 30px var(--neon-pink));
+            animation: flower-bloom 2s ease-in-out infinite;
+        }
+
+        .big-flower:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .big-flower:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        .big-flower:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        .big-kiss {
+            font-size: 10rem;
+            margin: 20px 0;
+            filter: drop-shadow(0 0 40px var(--neon-red));
+            animation: kiss-entrance 1s ease-out forwards, kiss-pop 1.5s ease-in-out infinite;
+            animation-delay: 0s, 1s;
+            transform: scale(0);
+        }
+
+        @keyframes kiss-entrance {
+            0% {
+                transform: scale(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.3) rotate(10deg);
+            }
+
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        /* SVG Lips Styling */
+        .svg-kiss {
+            width: 300px;
+            height: 200px;
+            filter: drop-shadow(0 0 30px #ff1493) drop-shadow(0 0 50px #ff69b4);
+        }
+
+        .svg-kiss path {
+            fill: url(#lipsGradient);
+            stroke: #ff1493;
+            stroke-width: 2;
+            animation: lips-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes lips-glow {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 10px #ff1493);
+            }
+
+            50% {
+                filter: drop-shadow(0 0 25px #ff1493) drop-shadow(0 0 35px #ff69b4);
+            }
+        }
+
+        .gift-message {
+            color: white;
+            font-size: 1.5rem;
+            margin-top: 20px;
+            text-shadow: 0 0 15px var(--neon-pink);
+            font-weight: bold;
+            animation: text-glow 2s ease-in-out infinite;
+        }
+
+        .gift-submessage {
+            color: #ffb3d9;
+            font-size: 1rem;
+            margin-top: 10px;
+            text-shadow: 0 0 10px rgba(255, 179, 217, 0.5);
+        }
+
+        .close-gift {
+            margin-top: 40px;
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            padding: 10px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .close-gift:hover {
+            background: white;
+            color: var(--neon-red);
+            transform: scale(1.1);
+            box-shadow: 0 0 20px white;
+        }
+
+        .floating-hearts {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0;
+            animation: float-heart 4s ease-in infinite;
+        }
+
+        @keyframes flower-bloom {
+
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+                filter: drop-shadow(0 0 20px var(--neon-pink));
+            }
+
+            50% {
+                transform: scale(1.2) rotate(10deg);
+                filter: drop-shadow(0 0 40px var(--neon-pink));
+            }
+        }
+
+        @keyframes kiss-pop {
+
+            0%,
+            100% {
+                transform: scale(1) rotate(-5deg);
+            }
+
+            50% {
+                transform: scale(1.15) rotate(5deg);
+            }
+        }
+
+        @keyframes text-glow {
+
+            0%,
+            100% {
+                text-shadow: 0 0 15px var(--neon-pink);
+            }
+
+            50% {
+                text-shadow: 0 0 30px var(--neon-pink), 0 0 40px var(--neon-red);
+            }
+        }
+
+        @keyframes float-heart {
+            0% {
+                bottom: -10%;
+                opacity: 0;
+                transform: translateX(0) rotate(0deg);
+            }
+
+            10% {
+                opacity: 0.8;
+            }
+
+            90% {
+                opacity: 0.8;
+            }
+
+            100% {
+                bottom: 110%;
+                opacity: 0;
+                transform: translateX(100px) rotate(360deg);
+            }
+        }
+
+        /* Sparkles around heart */
+        .sparkle-dot {
+            position: absolute;
+            background: white;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Spiral Canvas */
+        #spiral-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            /* Behind content but above stars? Let's check */
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Background Stars -->
+    <div id="stars-container"></div>
+
+    <!-- Spiral Heart Canvas -->
+    <canvas id="spiral-canvas"></canvas>
+
+    <!-- Gift Overlay -->
+    <div id="gift-overlay">
+        <div class="gift-content">
+            <div class="flower-bouquet">
+                <div class="big-flower">🌹</div>
+                <div class="big-flower">💐</div>
+                <div class="big-flower">🌺</div>
+            </div>
+            <div class="big-kiss">
+                <svg class="svg-kiss" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="lipsGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#ff1493;stop-opacity:1" />
+                            <stop offset="50%" style="stop-color:#ff69b4;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#c71585;stop-opacity:1" />
+                        </linearGradient>
+                        <filter id="glow">
+                            <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                            <feMerge>
+                                <feMergeNode in="coloredBlur" />
+                                <feMergeNode in="SourceGraphic" />
+                            </feMerge>
+                        </filter>
+                    </defs>
+
+                    <!-- Upper Lip -->
+                    <path
+                        d="M 40 50 Q 60 30, 80 40 Q 100 30, 120 40 Q 140 30, 160 50 L 155 55 Q 135 40, 115 50 Q 100 45, 85 50 Q 65 40, 45 55 Z"
+                        fill="url(#lipsGradient)" filter="url(#glow)" />
+
+                    <!-- Lower Lip -->
+                    <path d="M 45 55 Q 70 80, 100 75 Q 130 80, 155 55 L 150 60 Q 125 75, 100 70 Q 75 75, 50 60 Z"
+                        fill="url(#lipsGradient)" filter="url(#glow)" />
+
+                    <!-- Lip Shine/Highlight -->
+                    <ellipse cx="100" cy="65" rx="30" ry="8" fill="rgba(255,255,255,0.3)" />
+                    <ellipse cx="70" cy="48" rx="8" ry="4" fill="rgba(255,255,255,0.5)" />
+                    <ellipse cx="130" cy="48" rx="8" ry="4" fill="rgba(255,255,255,0.5)" />
+                </svg>
+            </div>
+            <div class="gift-message">MWAAAAH! 💕</div>
+            <div class="gift-submessage">Ito na ang iyong flower tsaka sweet kiss luvyyyyy!</div>
+            <div class="gift-submessage" style="margin-top: 15px; font-style: italic;">"You deserve all my luuuuvv luv!
+                Awww❤️"</div>
+            <button class="close-gift" onclick="location.reload()">Close (but
+                keep the luuuv!)</button>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="heart-container">
+            <div class="heart"></div>
+        </div>
+
+        <h1 id="main-title">Happy Valentine’s Luuuuv!!! ❤️</h1>
+        <p class="subtitle" id="sub-title">ILoveYou so Much, Walako Pera kasi huhu</p>
+
+        <button class="btn" id="revealAction">Pa Click Luv!</button>
+
+        <div id="message-area">
+            <span id="typewriter-text"></span><span class="cursor" id="cursor"></span>
+        </div>
+
+        <button id="gift-btn">Click mo para ma claim mo yung kiss ko mwehehez</button>
+    </div>
+
+    <script>
+        // --- Generate Twinkling Background Stars ---
+        const starsContainer = document.getElementById('stars-container');
+        const starCount = 100;
+
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            const x = Math.random() * 100;
+            const y = Math.random() * 100;
+            const size = Math.random() * 3 + 1; // 1 to 4px
+            const duration = Math.random() * 3 + 2; // 2 to 5s
+
+            star.style.left = `${x}vw`;
+            star.style.top = `${y}vh`;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.setProperty('--duration', `${duration}s`);
+
+            // Random delay so they don't all twinkle at once
+            star.style.animationDelay = `${Math.random() * 5}s`;
+
+            document.body.appendChild(star);
+        }
+
+        // --- Anatomical Heart Animation ---
+        const canvas = document.getElementById('spiral-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let particles = [];
+        let veins = [];
+        let bokehParticles = [];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        // Define anatomical heart structure with veins/arteries
+        function createHeartStructure() {
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const scale = Math.min(width, height) / 25;
+
+            // Main heart chambers outline points
+            const heartPoints = [];
+            for (let t = 0; t < Math.PI * 2; t += 0.02) {
+                const x = 16 * Math.pow(Math.sin(t), 3);
+                const y = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
+                heartPoints.push({
+                    x: x * scale + centerX,
+                    y: y * scale + centerY
+                });
+            }
+
+            // Create vein/artery paths
+            veins = [
+                // Main arteries from top
+                { start: { x: centerX - 30, y: centerY - 120 }, end: { x: centerX - 50, y: centerY - 60 }, color: 'cyan', width: 3 },
+                { start: { x: centerX + 30, y: centerY - 120 }, end: { x: centerX + 50, y: centerY - 60 }, color: 'cyan', width: 3 },
+                { start: { x: centerX, y: centerY - 130 }, end: { x: centerX, y: centerY - 70 }, color: 'cyan', width: 4 },
+
+                // Branching veins
+                { start: { x: centerX - 50, y: centerY - 60 }, end: { x: centerX - 70, y: centerY }, color: 'magenta', width: 2 },
+                { start: { x: centerX + 50, y: centerY - 60 }, end: { x: centerX + 70, y: centerY }, color: 'magenta', width: 2 },
+
+                // Lower chambers
+                { start: { x: centerX - 40, y: centerY }, end: { x: centerX - 30, y: centerY + 60 }, color: 'red', width: 2.5 },
+                { start: { x: centerX + 40, y: centerY }, end: { x: centerX + 30, y: centerY + 60 }, color: 'red', width: 2.5 },
+
+                // Central division
+                { start: { x: centerX, y: centerY - 70 }, end: { x: centerX, y: centerY + 80 }, color: 'purple', width: 2 },
+
+                // Small capillaries
+                { start: { x: centerX - 60, y: centerY - 30 }, end: { x: centerX - 80, y: centerY - 10 }, color: 'pink', width: 1 },
+                { start: { x: centerX + 60, y: centerY - 30 }, end: { x: centerX + 80, y: centerY - 10 }, color: 'pink', width: 1 },
+            ];
+
+            return heartPoints;
+        }
+
+        const heartOutline = createHeartStructure();
+
+        // Particle class for flowing energy
+        class EnergyParticle {
+            constructor(vein) {
+                this.vein = vein;
+                this.progress = Math.random();
+                this.speed = 0.005 + Math.random() * 0.01;
+                this.size = Math.random() * 2 + 1;
+                this.opacity = Math.random() * 0.5 + 0.5;
+            }
+
+            update() {
+                this.progress += this.speed;
+                if (this.progress > 1) this.progress = 0;
+
+                this.x = this.vein.start.x + (this.vein.end.x - this.vein.start.x) * this.progress;
+                this.y = this.vein.start.y + (this.vein.end.y - this.vein.start.y) * this.progress;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.vein.color === 'cyan' ? `rgba(0, 255, 255, ${this.opacity})` :
+                    this.vein.color === 'magenta' ? `rgba(255, 0, 255, ${this.opacity})` :
+                        this.vein.color === 'red' ? `rgba(255, 50, 100, ${this.opacity})` :
+                            this.vein.color === 'purple' ? `rgba(200, 100, 255, ${this.opacity})` :
+                                `rgba(255, 150, 200, ${this.opacity})`;
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = ctx.fillStyle;
+                ctx.fill();
+            }
+        }
+
+        // Bokeh/ambient particles
+        class BokehParticle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 30 + 10;
+                this.opacity = Math.random() * 0.3;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.hue = Math.random() < 0.5 ? 0 : 200; // Red or blue tones
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0 || this.x > width) this.speedX *= -1;
+                if (this.y < 0 || this.y > height) this.speedY *= -1;
+
+                this.opacity = Math.sin(Date.now() * 0.001 + this.x) * 0.2 + 0.1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
+                gradient.addColorStop(0, `hsla(${this.hue}, 100%, 50%, ${this.opacity})`);
+                gradient.addColorStop(1, `hsla(${this.hue}, 100%, 50%, 0)`);
+                ctx.fillStyle = gradient;
+                ctx.fill();
+            }
+        }
+
+        // Initialize particles
+        veins.forEach(vein => {
+            for (let i = 0; i < 20; i++) {
+                particles.push(new EnergyParticle(vein));
+            }
+        });
+
+        // Create bokeh
+        for (let i = 0; i < 15; i++) {
+            bokehParticles.push(new BokehParticle());
+        }
+
+        let pulsePhase = 0;
+
+        function animate() {
+            // Clear background completely for crisp colors
+            ctx.fillStyle = 'rgba(0, 0, 0, 1)';
+            ctx.fillRect(0, 0, width, height);
+
+            pulsePhase += 0.02;
+
+            // Draw bokeh background
+            bokehParticles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            // Draw heart outline with glow
+            ctx.beginPath();
+            heartOutline.forEach((point, i) => {
+                if (i === 0) ctx.moveTo(point.x, point.y);
+                else ctx.lineTo(point.x, point.y);
+            });
+            ctx.closePath();
+
+            const pulse = Math.sin(pulsePhase) * 0.3 + 0.7;
+            ctx.strokeStyle = `rgba(100, 200, 255, ${0.4 * pulse})`;
+            ctx.lineWidth = 2;
+            ctx.shadowBlur = 20;
+            ctx.shadowColor = 'rgba(100, 200, 255, 0.8)';
+            ctx.stroke();
+
+            // Draw veins/arteries
+            veins.forEach(vein => {
+                ctx.beginPath();
+                ctx.moveTo(vein.start.x, vein.start.y);
+                ctx.lineTo(vein.end.x, vein.end.y);
+
+                const colors = {
+                    cyan: `rgba(0, 255, 255, ${0.6 * pulse})`,
+                    magenta: `rgba(255, 0, 255, ${0.5 * pulse})`,
+                    red: `rgba(255, 50, 100, ${0.5 * pulse})`,
+                    purple: `rgba(200, 100, 255, ${0.4 * pulse})`,
+                    pink: `rgba(255, 150, 200, ${0.3 * pulse})`
+                };
+
+                ctx.strokeStyle = colors[vein.color];
+                ctx.lineWidth = vein.width;
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = colors[vein.color];
+                ctx.stroke();
+            });
+
+            // Draw energy particles
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // --- Interaction & Typewriter ---
+        const revealBtn = document.getElementById('revealAction');
+        const messageArea = document.getElementById('message-area');
+        const typeText = document.getElementById('typewriter-text');
+        const cursor = document.getElementById('cursor');
+        const subtitle = document.getElementById('sub-title');
+        const h1 = document.getElementById('main-title');
+
+        // The romantic letter content
+        const loveLetter = "Hey luuuuvv!!,\n\nDi man ako Romantic pero Iloveyou parin mwehehez, d man ako mamaterial pero luuv ko nalang sana sapat na hihe\n\nSana wag na sige ka pang away kay ka stress, wala din naman nakukuha sa kakapang away mo ganon din mag babati, so wag na mag sige ka pang away mag luv luv nalang tayo a? please lang kakorni kasi sige ka pang away para kang bata nyan bahala ka!!!\n\n So yun lang luv wala kasi ako pera pambili ng kung ano ano digital flower nalang atsaka kiss na masarap Awww!!! hihehehehe \n\n I LOVE YOU SO MUCH \n\nHappy Valentine's!\n\n";
+
+        revealBtn.addEventListener('click', () => {
+            revealBtn.style.display = 'none';
+            subtitle.style.display = 'none';
+            h1.style.display = 'none'; // Hide title to focus on heart and text
+
+            // Move heart up slightly
+            document.querySelector('.heart-container').style.marginBottom = '10px';
+
+            messageArea.style.display = 'block';
+
+            let i = 0;
+            const speed = 60;
+
+            function typeWriter() {
+                if (i < loveLetter.length) {
+                    if (loveLetter.charAt(i) === '\n') {
+                        typeText.innerHTML += '<br>';
+                    } else {
+                        typeText.innerHTML += loveLetter.charAt(i);
+                    }
+                    i++;
+                    setTimeout(typeWriter, speed);
+                } else {
+                    cursor.style.display = 'none';
+                    const sig = document.createElement('div');
+                    sig.className = 'final-signature';
+                    sig.innerHTML = "I love you ❤️";
+                    messageArea.appendChild(sig);
+
+                    // Add extra intensive sparkles at the end
+                    burstSparkles();
+
+                    // Show gift button
+                    setTimeout(() => {
+                        const giftBtn = document.getElementById('gift-btn');
+                        giftBtn.style.display = 'inline-block';
+                        giftBtn.addEventListener('click', () => {
+                            document.getElementById('gift-overlay').style.display = 'flex';
+
+                            // Create floating hearts in the overlay
+                            const heartInterval = setInterval(() => {
+                                const heart = document.createElement('div');
+                                heart.className = 'floating-hearts';
+                                heart.innerHTML = Math.random() < 0.5 ? '❤️' : '💕';
+                                heart.style.left = Math.random() * 100 + '%';
+                                heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                                heart.style.fontSize = (Math.random() * 1 + 1.5) + 'rem';
+                                document.getElementById('gift-overlay').appendChild(heart);
+
+                                setTimeout(() => heart.remove(), 5000);
+                            }, 300);
+
+                            // Store interval ID so we can clear it when overlay closes
+                            window.giftHeartInterval = heartInterval;
+                        });
+                    }, 1000);
+                }
+            }
+
+            typeWriter();
+        });
+
+        function burstSparkles() {
+            // Create a burst of small sparkles around the heart
+            const heart = document.querySelector('.heart-container');
+            const rect = heart.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            for (let i = 0; i < 50; i++) {
+                const s = document.createElement('div');
+                s.className = 'sparkle-dot';
+                s.style.left = centerX + 'px';
+                s.style.top = centerY + 'px';
+                s.style.transition = `all ${Math.random() + 0.5}s ease-out`;
+                document.body.appendChild(s);
+
+                // Animate out
+                setTimeout(() => {
+                    const angle = Math.random() * Math.PI * 2;
+                    const dist = Math.random() * 150 + 50;
+                    s.style.transform = `translate(${Math.cos(angle) * dist}px, ${Math.sin(angle) * dist}px) scale(0)`;
+                    s.style.opacity = 0;
+                }, 10);
+
+                setTimeout(() => s.remove(), 2000);
+            }
+        }
+    </script>
+</body>
+
+</html>
